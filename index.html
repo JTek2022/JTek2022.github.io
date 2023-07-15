@@ -44,9 +44,11 @@
 </head>
 <body>
 
-<p>Click on the button to copy the code to the clipboard.</p> 
+<p>Click on the button to <b> copy text </b> the code to the clipboard.</p> 
 
-<input type="text" value="mkdir backup_$(date +%Y-%m-%d_%H-%M) && find . -maxdepth 1 -type d \( -name "*log*" -o -name "*noctrix*" \) -exec mv -t backup_$(date +%Y-%m-%d_%H-%M) {} + && rm -r ~/Desktop/* && wget -P ~/Downloads https://raw.githubusercontent.com/JTek2022/sw-up/main/PRT-68.zip && unzip -q ~/Downloads/PRT-68.zip -d ~/noctrix-sw-tools && cd && cd noctrix-sw-tools && cd scripts-commercial && bash install-commercial.sh" id="myInput">
+<input type="text" value="mkdir backup_$(date +%Y-%m-%d_%H-%M) && find . -maxdepth 1 -type d \( -name &quot
+*log*&quot -o -name &quot*noctrix*&quot \) -exec mv -t backup_$(date +%Y-%m-%d_%H-%M) {} + && rm -r ~/Desktop/* && wget -P ~/Downloads https://raw.githubusercontent.com/JTek2022/sw-up/main/PRT-68.zip && unzip -q ~/Downloads/PRT-68.zip -d ~/noctrix-sw-tools && cd && cd noctrix-sw-tools && cd scripts-commercial && bash install-commercial.sh
+" id="myInput">
 
 
 
@@ -81,4 +83,3 @@ function outFunc() {
 </script>
 </body>
 </html>
-
