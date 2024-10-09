@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photo Clipboard Copier</title>
+    <title>Remote Titration Layout Menu</title>
     <style>
         .photo-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            justify-content: center;
         }
         .photo {
             width: 300px;
@@ -23,31 +24,32 @@
             padding: 5px 10px;
             border-radius: 5px;
             display: none;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
     <h1>Click on a layout to copy its code to clipboard</h1>
     <div class="photo-container">
-        <img src="images/100.jpg" alt="TSS and Patient Horizontal" class="photo" data-text="/tss layout 100">
-        <img src="images/101.jpg" alt="Full Patient Camera" class="photo" data-text="/tss layout 101">
-        <img src="images/200.jpg" alt="Full Screenshare" class="photo" data-text="/tss layout 200">
+        <img src="images/100.jpg" alt="100 TSS and Patient Horizontal" class="photo" data-text="/tss layout 100">
+        <img src="images/101.jpg" alt="101 Full Patient Camera" class="photo" data-text="/tss layout 101">
+        <img src="images/200.jpg" alt="200 Full Screenshare" class="photo" data-text="/tss layout 200">
         <br>
-        <img src="images/201.jpg" alt="Screenshare and Patient Camera" class="photo" data-text="/tss layout 201">
-        <img src="images/202.jpg" alt="Screenshare, TSS Camera and Patient Camera" class="photo" data-text="/tss layout 102">
-        <img src="images/203.jpg" alt="Screenshares and both cameras" class="photo" data-text="/tss layout 203">
+        <img src="images/201.jpg" alt="201 Screenshare and Patient Camera" class="photo" data-text="/tss layout 201">
+        <img src="images/202.jpg" alt="202 Screenshare, TSS Camera and Patient Camera" class="photo" data-text="/tss layout 102">
+        <img src="images/203.jpg" alt="203 Screenshares and both cameras" class="photo" data-text="/tss layout 203">
         <br>
-        <img src="images/204.jpg" alt="Screenshare and Patient Camera" class="photo" data-text="/tss layout 204">
-        <img src="images/300.jpg" alt="Screenshare and app" class="photo" data-text="/tss layout 300">
-        <img src="images/301.jpg" alt="Camera and app" class="photo" data-text="/tss layout 301">
+        <img src="images/204.jpg" alt="204 Screenshare and Patient Camera" class="photo" data-text="/tss layout 204">
+        <img src="images/300.jpg" alt="300 Screenshare and app" class="photo" data-text="/tss layout 300">
+        <img src="images/301.jpg" alt="301 Camera and app" class="photo" data-text="/tss layout 301">
         <br>
-        <img src="images/302.jpg" alt="Cameras and App" class="photo" data-text="/tss layout 302">
-        <img src="images/303.jpg" alt="Screenshare, Cameras and App" class="photo" data-text="/tss layout 303">
-        <img src="images/end_call.jpg" alt="Camera and app" class="photo" data-text="/tss call end">
+        <img src="images/302.jpg" alt="302 Cameras and App" class="photo" data-text="/tss layout 302">
+        <img src="images/303.jpg" alt="303 Screenshare, Cameras and App" class="photo" data-text="/tss layout 303">
+        <img src="images/end_call.jpg" alt="End Call" class="photo" data-text="/tss call end">
         <br>
         <img src="images/screenshare.jpg" alt="Share screen" class="photo" data-text="/tss screenshare start">
     </div>
-    <div class="tooltip" id="tooltip">Copied to clipboard!</div>
+    <div class="tooltip" id="tooltip"></div>
 
     <script>
         const photos = document.querySelectorAll('.photo');
@@ -57,19 +59,29 @@
             photo.addEventListener('click', () => {
                 const text = photo.getAttribute('data-text');
                 navigator.clipboard.writeText(text).then(() => {
-                    showTooltip(photo);
+                    showTooltip(photo, 'Copied to clipboard!');
                 });
+            });
+
+            photo.addEventListener('mouseover', () => {
+                showTooltip(photo, photo.alt);
+            });
+
+            photo.addEventListener('mouseout', () => {
+                hideTooltip();
             });
         });
 
-        function showTooltip(element) {
+        function showTooltip(element, text) {
             const rect = element.getBoundingClientRect();
+            tooltip.textContent = text;
             tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.offsetWidth / 2}px`;
             tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
             tooltip.style.display = 'block';
-            setTimeout(() => {
-                tooltip.style.display = 'none';
-            }, 2000);
+        }
+
+        function hideTooltip() {
+            tooltip.style.display = 'none';
         }
     </script>
 </body>
